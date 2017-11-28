@@ -11,6 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+//Route::get("/register", 'RegisterController@create');
+//
+//Route::post("register", 'RegisterController@store');
+//
+//Route::get("/login", 'SessionsController@create');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', 'InfoUserController@get');
+Route::get('/user/edit', 'UpdateUserController@edit')->name('editUser');
+Route::post('user/edit', ['uses' =>'UpdateUserController@postedit']);
+Route::get('program/{id}', 'ProgramController@show');
+Route::post('/search', 'SearchController@result') -> name('search');
+Route::get('/search', 'SearchController@result') -> name('search');
+Route::get('/coach/{id}', 'CoachController@show');
+Route::post('/registration', 'RegistrationController@create') -> name('registration');
+Route::get('/registration', 'RegistrationController@index');
+Route::get('/tutorial', 'TutorialController@getInfo');
+Route::post('/tutorial', 'TutorialController@index') -> name('tutorial');
